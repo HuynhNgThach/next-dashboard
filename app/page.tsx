@@ -6,7 +6,8 @@ import Link from "next/link";
 export default function Page() {
   return (
     <main className="flex min-h-screen justify-center items-center w-full">
-      <input type="number" inputMode="numeric" className="h-10" />
+      <p>new1</p>
+      <input type="text" inputMode="numeric" className="h-10" />
     </main>
   );
 }
