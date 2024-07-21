@@ -6,25 +6,28 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Page() {
   function getMapUrl(address = "Ben Thanh, District 1, Ho Chi Minh City, Vietnam") {
-    // URL encode the address
-    const encodedAddress = encodeURIComponent(address);
+    if (typeof window !== "undefined") {
+      const encodedAddress = encodeURIComponent(address);
 
-    // Detect the user's platform
-    const userAgent = navigator.userAgent;
-    let mapUrl = '';
+      // Detect the user's platform
+      const userAgent = window.navigator.userAgent;
+      let mapUrl = '';
 
-    if (/android/i.test(userAgent)) {
-      // Android platform
-      mapUrl = `geo:0,0?q=${encodedAddress}`;
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-      // iOS platform
-      mapUrl = `maps:?q=${encodedAddress}`;
-    } else {
-      // Default to Google Maps web
-      mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+      if (/android/i.test(userAgent)) {
+        // Android platform
+        mapUrl = `geo:0,0?q=${encodedAddress}`;
+      } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+        // iOS platform
+        mapUrl = `maps:?q=${encodedAddress}`;
+      } else {
+        // Default to Google Maps web
+        mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+      }
+
+      return mapUrl;
     }
-
-    return mapUrl;
+    // URL encode the address
+    return ''
   }
   return (
     <main className="flex min-h-screen justify-center items-center w-full">
